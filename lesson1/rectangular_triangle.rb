@@ -7,29 +7,20 @@ b = gets.chomp.to_f
 print "Enter side c - "
 c = gets.chomp.to_f
 #выявляем гипотенузу и записываем ее в переменную a
-if a > b
-  if a < c
-    tmp = a
-    a = c
-    c = tmp
-  end
+if a > b && a < c
+  a, c = c, a
 elsif b > c
-  tmp = a
-  a = b
-  b = tmp
+  a, b = b, a
 else
-  tmp = c
-  a = c
-  c = tmp
+  a, c = c, a
 end
 
 str = ""
 
-if (a**2) == (b**2 + c**2)
+if ( a ** 2 ) == ( b ** 2 + c ** 2)
   str += "rectangular "
 else
   str += "not rectangular "
-
 end
 
 if (a == b) && (b == c)

@@ -1,13 +1,12 @@
 print "Enter your name - "
-name = gets.chomp
-name.capitalize!
+name = gets.chomp.capitalize
 
 print "Enter your height - "
-height = gets.chomp
+height = gets.chomp.to_i
 
-optimal_weight = height.to_i - 110
+optimal_weight = height - 110
 
-if optimal_weight > 0
+if optimal_weight.positive?
   puts "Hi #{name}, your optimal weight is #{optimal_weight}"
 else
   puts "Hi #{name}, your weight is optimal"

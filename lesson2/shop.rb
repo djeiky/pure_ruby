@@ -12,8 +12,11 @@ loop do
   cart[item_name] = {'price' => item_price, 'count' => items_count}
 end
 
-puts cart
-
+puts "Name Price Count"
 amount = 0
-cart.each{|item, details| amount += details['price'] * details['count']}
-puts amount
+cart.each do |item, details| 
+  amount += details['price'] * details['count']
+  puts "#{item} #{details['price']} #{details['count']}" 
+end
+
+puts "Amount: #{amount}"

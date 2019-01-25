@@ -19,7 +19,7 @@ class Station
   end
 
   def show_trains(type = nil)
-    @trains.each {|train| puts train.name}
+    @trains.each {|train| puts train.number}
   end
 end
 
@@ -49,7 +49,7 @@ end
 
 class Train
   attr_accessor :speed, :current_station
-  attr_reader :carriges_count, :route, :number
+  attr_reader :carriges_count, :route, :number, :number
 
   def initialize(number, type, carriges_count)
     @number = number
@@ -59,7 +59,7 @@ class Train
   end
 
   def stop
-    self.speed = 0
+    speed = 0
   end
 
   def add_carrige
@@ -77,6 +77,7 @@ class Train
   def set_route(route)
     @route = route
     @current_station = @route.stations.first
+    @current_station.get_train(self)
   end
 
   def next_station
@@ -103,6 +104,7 @@ class Train
       puts "end of route"
     else
       @current_station = @route.stations[station_index + 1]
+      @current_station.get_train(self)
     end
   end
 
@@ -112,6 +114,7 @@ class Train
       puts "begin of route"
     else
       @current_station = @route.stations[station_index - 1]
+      @current_station.get_train(self)
     end
   end
 end

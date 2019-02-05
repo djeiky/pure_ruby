@@ -13,7 +13,7 @@ class Train
   end
 
   def add_carrige(carrige)
-    if @speed == 0
+    if @speed == 0 && carrige.type == self.type
       @carriges << carrige
     end
   end

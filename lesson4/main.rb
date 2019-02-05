@@ -64,9 +64,13 @@ def new_route
     a = gets.to_i
     print "Enter number of end station - "
     b = gets.to_i
-    route = Route.new(name, @stations[a], @stations[b])
-    @routes << route
-    puts @routes
+    if @stations[a] && @stations[b]
+      route = Route.new(name, @stations[a], @stations[b])
+      @routes << route
+      puts @routes
+    else
+      puts "Enter correct stations"
+    end
   else
     puts "Create stations"
   end
@@ -84,7 +88,11 @@ def add_station
     print_stations
     print "Enter station number - "
     number = gets.to_i
-    @routes[route].add_station(@stations[number])
+    if @routes[route] && @stations[number]
+      @routes[route].add_station(@stations[number])
+    else
+      puts "Enter correct Route or Station"
+    end
   else
     puts "No routes!"
   end
@@ -110,29 +118,37 @@ def add_route_to_train
   print "Enter route number - "
   route = gets.to_i
   train = take_train
-  unless train.nil?
+  unless train.nil? && @routes[route]
     @trains[train].set_route(@routes[route])
   else
-    puts "No Trains exist!"
+    puts "No Trains exist or wrong route"
   end
 end
 
 def move_forward
   train = take_train
-  @trains[train].move_forward
+  if train
+    @trains[train].move_forward
+  else
+    puts "Enter correct train"
+  end
 end
 
 def move_backward
   train = take_train
-  @trains[train].move_back
+  if train 
+    @trains[train].move_back
+  else
+    puts "enter correct train"
+  end
 end
 
 def add_carrige
   train = @trains[take_train]
 
-  if train.is_a?(PassengerTrain)
+  if train && train.type == 'Passenger'
     train.add_carrige(PassengerCarrige.new)
-  elsif train.is_a?(CargoTrain)
+  elsif train && train.type == 'Cargo'
     train.add_carrige(CargoCarrige.new)
   else
     puts "No trains found"
@@ -187,6 +203,8 @@ loop do
       remove_carrige
     when 12
       break
+    else
+      puts "Wrong choice"
   end
 end
 

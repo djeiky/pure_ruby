@@ -9,9 +9,10 @@ class Train
 
   @@all_trains = {}
 
-  def initialize(number)
+  def initialize(number, type)
     @number = number
     @speed = 0
+    @type = type
     @carriges = []
     @@all_trains[@number] = self
     validate!
@@ -92,6 +93,7 @@ protected
 
   def validate!
     raise "Invalid train number!" if number !~ TRAIN_NUMBER_REGEX
+    raise "Invalid type of train" if type.nil?
   end
 end
 

@@ -35,6 +35,8 @@ protected
 
   def validate!
     raise "Invalid route name!!" if name !~ ROUTE_NAME_REGEX
+    raise "Invalid stations count in route!" if @stations.size < 2
+    raise "Invalid stations" unless @stations.each {|s|  s.is_a? Station}
   end
 end
 

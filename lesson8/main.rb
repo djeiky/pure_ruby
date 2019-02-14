@@ -38,18 +38,26 @@ def show_train_carriges(train = nil)
     train = @trains[take_train]
   end
   if train.type == 'Passenger'
-    train.each_carrige { |c| puts "Carrige number - #{c.number} passengers - #{c.passengers_count} free seats - #{c.free_seats}" }
+    train.each_carrige do |c|
+      print "Carrige number - #{c.number} "
+      print "passengers - #{c.passengers_count} "
+      puts "free seats - #{c.free_seats}"
+    end
   else
-    train.each_carrige { |c| puts "Carrige number - #{c.number} weight - #{c.weight} remain weight - #{c.remain_weight}" }
+    train.each_carrige do |c|
+      print "Carrige number - #{c.number} "
+      print "weight - #{c.weight} "
+      puts "remain weight - #{c.remain_weight}"
+    end
   end
 end
 
 def take_train(train = nil)
-  if @trains.size >= 0
-    print_trains(train)
-    print 'Enter train number - '
-    gets.to_i
-  end
+  return if @trains.nil?
+
+  print_trains(train)
+  print 'Enter train number - '
+  gets.to_i
 end
 
 def new_station

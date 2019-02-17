@@ -87,6 +87,9 @@ def new_train
   when 2
     @trains << CargoTrain.new(number)
   end
+rescue StandartError => e
+  puts e.message
+  retry
 end
 
 def print_trains(type = nil)
